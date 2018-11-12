@@ -1,5 +1,5 @@
 // Protocol Buffers - Google's data interchange format
-// Copyright 2008 Google Inc.  All rights reserved.
+// Copyright 2018 Oleksii Pylypenko.  All rights reserved.
 // https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
@@ -28,55 +28,77 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// Author: kenton@google.com (Kenton Varda)
-//  Based on original Protocol Buffers design by
-//  Sanjay Ghemawat, Jeff Dean, and others.
-//
-// Generates Java code for a given .proto file.
+// Author: oleksiy.pylypenko@gmail.com
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_H__
+#ifndef GOOGLE_PROTOBUF_COMPILER_KOTLIN_FILE_H__
+#define GOOGLE_PROTOBUF_COMPILER_KOTLIN_FILE_H__
 
+#include <memory>
 #include <string>
-#include <google/protobuf/compiler/code_generator.h>
+#include <vector>
+#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/compiler/java/java_options.h>
+#include <google/protobuf/compiler/java/java_context.h>
 
-#include <google/protobuf/port_def.inc>
+namespace google {
+namespace protobuf {
+class FileDescriptor;          // descriptor.h
+namespace io {
+  class Printer;               // printer.h
+}
+namespace compiler {
+  class GeneratorContext;      // code_generator.h
+  namespace kotlin {
+    class Context;             // context.h
+    class MessageGenerator;    // message.h
+  }
+  namespace java {
+    class ClassNameResolver;   // name_resolver.h
+  }
+}
+}  // namespace protobuf
+}  // namespace google
 
 namespace google {
 namespace protobuf {
 namespace compiler {
-namespace java {
+namespace kotlin {
 
-// CodeGenerator implementation which generates Java code.  If you create your
-// own protocol compiler binary and you want it to support Java output, you
-// can do so by registering an instance of this CodeGenerator with the
-// CommandLineInterface in your main() function.
-class PROTOC_EXPORT JavaGenerator : public CodeGenerator {
+class FileGenerator {
  public:
-  JavaGenerator();
-  ~JavaGenerator();
+  FileGenerator(const FileDescriptor* file,
+                const java::Options& options,
+                bool immutable_api = true);
+  ~FileGenerator();
 
-  // implements CodeGenerator ----------------------------------------
-  bool Generate(const FileDescriptor* file,
-                const std::string& parameter,
-                GeneratorContext* context,
-                std::string* error) const;
+  // Checks for problems that would otherwise lead to cryptic compile errors.
+  // Returns true if there are no problems, or writes an error description to
+  // the given string and returns false otherwise.
+  bool Validate(std::string* error);
 
- protected:
-  bool ParseGeneratorOptions(const string& parameter,
-                             Options &file_options,
-                             string *error) const;
+  void Generate(io::Printer* printer);
+
+  const std::string& java_package() { return java_package_; }
+  const std::string& classname() { return classname_; }
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(JavaGenerator);
+
+  const FileDescriptor* file_;
+  std::string java_package_;
+  std::string classname_;
+
+  std::vector<std::unique_ptr<MessageGenerator>> message_generators_;
+  std::unique_ptr<java::Context> context_;
+  java::ClassNameResolver* name_resolver_;
+  const java::Options options_;
+  bool immutable_api_;
+
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileGenerator);
 };
 
-}  // namespace java
+}  // namespace kotlin
 }  // namespace compiler
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
-
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_H__
+#endif  // GOOGLE_PROTOBUF_COMPILER_KOTLIN_FILE_H__

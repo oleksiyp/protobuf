@@ -1,5 +1,5 @@
 // Protocol Buffers - Google's data interchange format
-// Copyright 2008 Google Inc.  All rights reserved.
+// Copyright 2018 Oleksii Pylypenko.  All rights reserved.
 // https://developers.google.com/protocol-buffers/
 //
 // Redistribution and use in source and binary forms, with or without
@@ -31,52 +31,57 @@
 // Author: kenton@google.com (Kenton Varda)
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
-//
-// Generates Java code for a given .proto file.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_H__
+#ifndef GOOGLE_PROTOBUF_COMPILER_KOTLIN_MESSAGE_H__
+#define GOOGLE_PROTOBUF_COMPILER_KOTLIN_MESSAGE_H__
 
 #include <string>
-#include <google/protobuf/compiler/code_generator.h>
-#include <google/protobuf/compiler/java/java_options.h>
-
-#include <google/protobuf/port_def.inc>
+#include <map>
+#include <google/protobuf/descriptor.h>
 
 namespace google {
 namespace protobuf {
 namespace compiler {
 namespace java {
+class Context;            // context.h
+class ClassNameResolver;  // name_resolver.h
+}  // namespace java
+}  // namespace compiler
+namespace io {
+class Printer;  // printer.h
+}
+}  // namespace protobuf
+}  // namespace google
 
-// CodeGenerator implementation which generates Java code.  If you create your
-// own protocol compiler binary and you want it to support Java output, you
-// can do so by registering an instance of this CodeGenerator with the
-// CommandLineInterface in your main() function.
-class PROTOC_EXPORT JavaGenerator : public CodeGenerator {
+namespace google {
+namespace protobuf {
+namespace compiler {
+namespace kotlin {
+
+class MessageGenerator {
  public:
-  JavaGenerator();
-  ~JavaGenerator();
+  MessageGenerator(const Descriptor* descriptor, java::Context* context, bool immutable_api);
+  ~MessageGenerator();
 
-  // implements CodeGenerator ----------------------------------------
-  bool Generate(const FileDescriptor* file,
-                const std::string& parameter,
-                GeneratorContext* context,
-                std::string* error) const;
+  void GenerateBuildFunction(io::Printer* printer);
+
+  void GenerateAccessorBuilders(io::Printer* printer);
+
+  void GenerateMutableListAppender(io::Printer* printer);
 
  protected:
-  bool ParseGeneratorOptions(const string& parameter,
-                             Options &file_options,
-                             string *error) const;
+  java::Context* context_;
+  java::ClassNameResolver* name_resolver_;
+  const Descriptor* descriptor_;
+  bool immutable_api_;
 
  private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(JavaGenerator);
+  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MessageGenerator);
 };
 
-}  // namespace java
+}  // namespace kotlin
 }  // namespace compiler
 }  // namespace protobuf
 }  // namespace google
 
-#include <google/protobuf/port_undef.inc>
-
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_H__
+#endif  // GOOGLE_PROTOBUF_COMPILER_KOTLIN_MESSAGE_H__
