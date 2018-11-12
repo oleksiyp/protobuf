@@ -59,6 +59,34 @@ set(libprotoc_files
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_shared_code_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_string_field.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_string_field_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_context.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_doc_comment.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum_field_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_extension.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_extension_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_file.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_generator.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_generator_factory.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_helpers.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_map_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_map_field_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_builder.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_builder_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_field_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_name_resolver.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_primitive_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_primitive_field_lite.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_service.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_shared_code_generator.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_string_field.cc
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_string_field_lite.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/js/js_generator.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/js/well_known_types_embed.cc
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum.cc
@@ -143,6 +171,34 @@ set(libprotoc_headers
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_shared_code_generator.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_string_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/java/java_string_field_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_context.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_doc_comment.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum_field_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_enum_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_extension.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_extension_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_file.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_generator_factory.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_helpers.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_map_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_map_field_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_builder.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_builder_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_field_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_message_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_name_resolver.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_options.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_primitive_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_primitive_field_lite.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_service.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_shared_code_generator.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_string_field.h
+  ${protobuf_source_dir}/src/google/protobuf/compiler/kotlin/kotlin_string_field_lite.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_enum_field.h
   ${protobuf_source_dir}/src/google/protobuf/compiler/objectivec/objectivec_extension.h
