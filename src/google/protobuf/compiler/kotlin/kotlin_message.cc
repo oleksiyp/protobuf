@@ -255,7 +255,7 @@ void ImmutableMessageGenerator::GenerateInterface(io::Printer* printer) {
         "    com.google.protobuf.GeneratedMessage$ver$.\n"
         "        ExtendableMessageOrBuilder<$classname$> {\n",
         "deprecation", descriptor_->options().deprecated() ?
-            "@kotlin.lang.Deprecated " : "",
+            "@kotlin.Deprecated " : "",
         "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
         "classname", descriptor_->name(),
         "{", "", "}", "", "ver", GeneratedCodeVersionSuffix());
@@ -265,7 +265,7 @@ void ImmutableMessageGenerator::GenerateInterface(io::Printer* printer) {
         "    $extra_interfaces$\n"
         "    com.google.protobuf.MessageOrBuilder {\n",
         "deprecation", descriptor_->options().deprecated() ?
-            "@kotlin.lang.Deprecated " : "",
+            "@kotlin.Deprecated " : "",
         "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
         "classname", descriptor_->name(),
         "{", "", "}", "");
@@ -306,7 +306,7 @@ void ImmutableMessageGenerator::Generate(io::Printer* printer) {
   variables["extra_interfaces"] = ExtraMessageInterfaces(descriptor_);
   variables["ver"] = GeneratedCodeVersionSuffix();
   variables["deprecation"] = descriptor_->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
 
   WriteMessageDocComment(printer, descriptor_);
   MaybePrintGeneratedAnnotation(context_, printer, descriptor_,
@@ -432,7 +432,7 @@ void ImmutableMessageGenerator::Generate(io::Printer* printer) {
       const FieldDescriptor* field = descriptor_->oneof_decl(i)->field(j);
       printer->Print(
           "$deprecation$$field_name$($field_number$),\n", "deprecation",
-          field->options().deprecated() ? "@kotlin.lang.Deprecated " : "",
+          field->options().deprecated() ? "@kotlin.Deprecated " : "",
           "field_name", ToUpper(field->name()), "field_number",
           SimpleItoa(field->number()));
     }
@@ -449,7 +449,7 @@ void ImmutableMessageGenerator::Generate(io::Printer* printer) {
       "/**\n"
       " * @deprecated Use {@link #forNumber(int)} instead.\n"
       " */\n"
-      "@kotlin.lang.Deprecated\n"
+      "@kotlin.Deprecated\n"
       "public static $oneof_capitalized_name$Case valueOf(int value) {\n"
       "  return forNumber(value);\n"
       "}\n"
@@ -843,7 +843,7 @@ GenerateDescriptorMethods(io::Printer* printer) {
     }
     printer->Print(
         "default:\n"
-        "  throw new RuntimeException(\n"
+        "  throw RuntimeException(\n"
         "      \"Invalid map field number: \" + number);\n");
     printer->Outdent();
     printer->Outdent();
@@ -1207,7 +1207,7 @@ GenerateParsingConstructor(io::Printer* printer) {
   printer->Print(
       "this();\n"
       "if (extensionRegistry == null) {\n"
-      "  throw new kotlin.lang.NullPointerException();\n"
+      "  throw kotlin.lang.NullPointerException();\n"
       "}\n");
 
   // Use builder bits to track mutable repeated fields.
@@ -1300,7 +1300,7 @@ GenerateParsingConstructor(io::Printer* printer) {
       "} catch (com.google.protobuf.InvalidProtocolBufferException e) {\n"
       "  throw e.setUnfinishedMessage(this);\n"
       "} catch (kotlin.io.IOException e) {\n"
-      "  throw new com.google.protobuf.InvalidProtocolBufferException(\n"
+      "  throw com.google.protobuf.InvalidProtocolBufferException(\n"
       "      e).setUnfinishedMessage(this);\n"
       "} finally {\n");
   printer->Indent();
@@ -1331,7 +1331,7 @@ void ImmutableMessageGenerator::GenerateParser(io::Printer* printer) {
       "$visibility$ static final com.google.protobuf.Parser<$classname$>\n"
       "    PARSER = new com.google.protobuf.AbstractParser<$classname$>() {\n",
       "visibility",
-      ExposePublicParser(descriptor_->file()) ? "@kotlin.lang.Deprecated public"
+      ExposePublicParser(descriptor_->file()) ? "@kotlin.Deprecated public"
                                               : "private",
       "classname", descriptor_->name());
   printer->Indent();
@@ -1357,7 +1357,7 @@ void ImmutableMessageGenerator::GenerateParser(io::Printer* printer) {
         "} catch (com.google.protobuf.InvalidProtocolBufferException e) {\n"
         "  throw e.setUnfinishedMessage(builder.buildPartial());\n"
         "} catch (kotlin.io.IOException e) {\n"
-        "  throw new com.google.protobuf.InvalidProtocolBufferException(\n"
+        "  throw com.google.protobuf.InvalidProtocolBufferException(\n"
         "      e.getMessage()).setUnfinishedMessage(\n"
         "          builder.buildPartial());\n"
         "}\n"
@@ -1450,7 +1450,7 @@ void ImmutableMessageGenerator::GenerateAnyMethods(io::Printer* printer) {
     "    kotlin.lang.Class<T> clazz)\n"
     "    throws com.google.protobuf.InvalidProtocolBufferException {\n"
     "  if (!is(clazz)) {\n"
-    "    throw new com.google.protobuf.InvalidProtocolBufferException(\n"
+    "    throw com.google.protobuf.InvalidProtocolBufferException(\n"
     "        \"Type of the Any message does not match the given class.\");\n"
     "  }\n"
     "  if (cachedUnpackValue != null) {\n"

@@ -128,15 +128,15 @@ void SetPrimitiveVariables(const FieldDescriptor* descriptor,
   if (IsReferenceType(GetKotlinType(descriptor))) {
     (*variables)["null_check"] =
         "  if (value == null) {\n"
-        "    throw new NullPointerException();\n"
+        "    throw NullPointerException();\n"
         "  }\n";
   } else {
     (*variables)["null_check"] = "";
   }
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
   int fixed_size = FixedSize(GetType(descriptor));
   if (fixed_size != -1) {
     (*variables)["fixed_size"] = SimpleItoa(fixed_size);

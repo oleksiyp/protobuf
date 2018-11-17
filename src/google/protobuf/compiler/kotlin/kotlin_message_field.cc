@@ -66,10 +66,10 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   (*variables)["group_or_message"] =
     (GetType(descriptor) == FieldDescriptor::TYPE_GROUP) ?
     "Group" : "Message";
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
   (*variables)["on_changed"] = "onChanged();";
   (*variables)["ver"] = GeneratedCodeVersionSuffix();
   (*variables)["get_parser"] =
@@ -296,7 +296,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "$deprecation$public Builder ${$set$capitalized_name$$}$($type$ value)",
 
     "if (value == null) {\n"
-    "  throw new NullPointerException();\n"
+    "  throw NullPointerException();\n"
     "}\n"
     "$name$_ = value;\n"
     "$on_changed$\n",
@@ -615,7 +615,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "$deprecation$public Builder ${$set$capitalized_name$$}$($type$ value)",
 
     "if (value == null) {\n"
-    "  throw new NullPointerException();\n"
+    "  throw NullPointerException();\n"
     "}\n"
     "$oneof_name$_ = value;\n"
     "$on_changed$\n",
@@ -994,7 +994,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "$deprecation$public Builder ${$set$capitalized_name$$}$(\n"
     "    int index, $type$ value)",
     "if (value == null) {\n"
-    "  throw new NullPointerException();\n"
+    "  throw NullPointerException();\n"
     "}\n"
     "ensure$capitalized_name$IsMutable();\n"
     "$name$_.set(index, value);\n"
@@ -1022,7 +1022,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "$deprecation$public Builder ${$add$capitalized_name$$}$($type$ value)",
 
     "if (value == null) {\n"
-    "  throw new NullPointerException();\n"
+    "  throw NullPointerException();\n"
     "}\n"
     "ensure$capitalized_name$IsMutable();\n"
     "$name$_.add(value);\n"
@@ -1040,7 +1040,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "    int index, $type$ value)",
 
     "if (value == null) {\n"
-    "  throw new NullPointerException();\n"
+    "  throw NullPointerException();\n"
     "}\n"
     "ensure$capitalized_name$IsMutable();\n"
     "$name$_.add(index, value);\n"

@@ -44,7 +44,7 @@ namespace protobuf {
 namespace compiler {
 namespace kotlin {
 
-string EscapeKotlindoc(const string& input) {
+string EscapeJavadoc(const string& input) {
   string result;
   result.reserve(input.size() * 2);
 
@@ -70,7 +70,7 @@ string EscapeKotlindoc(const string& input) {
         }
         break;
       case '@':
-        // '@' starts kotlindoc tags including the @deprecated tag, which will
+        // '@' starts javadoc tags including the @deprecated tag, which will
         // cause a compile-time error if inserted before a declaration that
         // does not have a corresponding @Deprecated annotation.
         result.append("&#64;");
@@ -113,7 +113,7 @@ static void WriteDocCommentBodyForLocation(
 
     // If the comment itself contains block comment start or end markers,
     // HTML-escape them so that they don't accidentally close the doc comment.
-    comments = EscapeKotlindoc(comments);
+    comments = EscapeJavadoc(comments);
 
     std::vector<string> lines = Split(comments, "\n");
     while (!lines.empty() && lines.back().empty()) {
@@ -168,7 +168,7 @@ void WriteMessageDocComment(io::Printer* printer, const Descriptor* message) {
   printer->Print(
     " * Protobuf type {@code $fullname$}\n"
     " */\n",
-    "fullname", EscapeKotlindoc(message->full_name()));
+    "fullname", EscapeJavadoc(message->full_name()));
 }
 
 void WriteFieldDocComment(io::Printer* printer, const FieldDescriptor* field) {
@@ -184,7 +184,7 @@ void WriteFieldDocComment(io::Printer* printer, const FieldDescriptor* field) {
   WriteDocCommentBody(printer, field);
   printer->Print(
     " * <code>$def$</code>\n",
-    "def", EscapeKotlindoc(FirstLineOf(field->DebugString())));
+    "def", EscapeJavadoc(FirstLineOf(field->DebugString())));
   printer->Print(" */\n");
 }
 
@@ -194,7 +194,7 @@ void WriteEnumDocComment(io::Printer* printer, const EnumDescriptor* enum_) {
   printer->Print(
     " * Protobuf enum {@code $fullname$}\n"
     " */\n",
-    "fullname", EscapeKotlindoc(enum_->full_name()));
+    "fullname", EscapeJavadoc(enum_->full_name()));
 }
 
 void WriteEnumValueDocComment(io::Printer* printer,
@@ -204,7 +204,7 @@ void WriteEnumValueDocComment(io::Printer* printer,
   printer->Print(
     " * <code>$def$</code>\n"
     " */\n",
-    "def", EscapeKotlindoc(FirstLineOf(value->DebugString())));
+    "def", EscapeJavadoc(FirstLineOf(value->DebugString())));
 }
 
 void WriteServiceDocComment(io::Printer* printer,
@@ -214,7 +214,7 @@ void WriteServiceDocComment(io::Printer* printer,
   printer->Print(
     " * Protobuf service {@code $fullname$}\n"
     " */\n",
-    "fullname", EscapeKotlindoc(service->full_name()));
+    "fullname", EscapeJavadoc(service->full_name()));
 }
 
 void WriteMethodDocComment(io::Printer* printer,
@@ -224,7 +224,7 @@ void WriteMethodDocComment(io::Printer* printer,
   printer->Print(
     " * <code>$def$</code>\n"
     " */\n",
-    "def", EscapeKotlindoc(FirstLineOf(method->DebugString())));
+    "def", EscapeJavadoc(FirstLineOf(method->DebugString())));
 }
 
 }  // namespace kotlin

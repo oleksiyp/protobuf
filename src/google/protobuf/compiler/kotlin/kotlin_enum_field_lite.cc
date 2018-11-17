@@ -72,10 +72,10 @@ void SetEnumVariables(const FieldDescriptor* descriptor,
       static_cast<int32>(internal::WireFormat::MakeTag(descriptor)));
   (*variables)["tag_size"] = SimpleItoa(
       internal::WireFormat::TagSize(descriptor->number(), GetType(descriptor)));
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
   (*variables)["required"] = descriptor->is_required() ? "true" : "false";
 
   if (SupportFieldPresence(descriptor->file())) {
@@ -196,7 +196,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void set$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  $set_has_field_bit_message$\n"
     "  $name$_ = value.getNumber();\n"
@@ -417,7 +417,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void set$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  $set_oneof_case_message$;\n"
     "  $oneof_name$_ = value.getNumber();\n"
@@ -676,7 +676,7 @@ GenerateMembers(io::Printer* printer) const {
     "private void set$capitalized_name$(\n"
     "    int index, $type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.setInt(index, value.getNumber());\n"
@@ -685,7 +685,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void add$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.addInt(value.getNumber());\n"

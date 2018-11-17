@@ -78,13 +78,13 @@ void SetPrimitiveVariables(const FieldDescriptor* descriptor,
       WireFormat::TagSize(descriptor->number(), GetType(descriptor)));
   (*variables)["null_check"] =
       "  if (value == null) {\n"
-      "    throw new NullPointerException();\n"
+      "    throw NullPointerException();\n"
       "  }\n";
 
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
   (*variables)["required"] = descriptor->is_required() ? "true" : "false";
 
   if (SupportFieldPresence(descriptor->file())) {

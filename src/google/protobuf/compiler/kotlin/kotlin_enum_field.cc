@@ -72,10 +72,10 @@ void SetEnumVariables(const FieldDescriptor* descriptor,
       static_cast<int32>(internal::WireFormat::MakeTag(descriptor)));
   (*variables)["tag_size"] = SimpleItoa(
       internal::WireFormat::TagSize(descriptor->number(), GetType(descriptor)));
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
   (*variables)["on_changed"] = "onChanged();";
   // Use deprecated valueOf() method to be compatible with old generated code
   // for v2.5.0/v2.6.1.
@@ -247,7 +247,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "$deprecation$public Builder ${$set$capitalized_name$$}$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  $set_has_field_bit_builder$\n"
     "  $name$_ = value.getNumber();\n"
@@ -472,7 +472,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "$deprecation$public Builder ${$set$capitalized_name$$}$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  $set_oneof_case_message$;\n"
     "  $oneof_name$_ = value.getNumber();\n"
@@ -731,7 +731,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
     "$deprecation$public Builder ${$set$capitalized_name$$}$(\n"
     "    int index, $type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.set(index, value.getNumber());\n"
@@ -743,7 +743,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "$deprecation$public Builder ${$add$capitalized_name$$}$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.add(value.getNumber());\n"

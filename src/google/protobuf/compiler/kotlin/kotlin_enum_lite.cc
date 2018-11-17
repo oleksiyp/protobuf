@@ -90,7 +90,7 @@ void EnumLiteGenerator::Generate(io::Printer* printer) {
     vars["number"] = SimpleItoa(canonical_values_[i]->number());
     WriteEnumValueDocComment(printer, canonical_values_[i]);
     if (canonical_values_[i]->options().deprecated()) {
-      printer->Print("@kotlin.lang.Deprecated\n");
+      printer->Print("@kotlin.Deprecated\n");
     }
     printer->Print(vars,
       "$name$($number$),\n");
@@ -141,7 +141,7 @@ void EnumLiteGenerator::Generate(io::Printer* printer) {
   if (SupportUnknownEnumValue(descriptor_->file())) {
     printer->Print(
         "  if (this == UNRECOGNIZED) {\n"
-        "    throw new kotlin.lang.IllegalArgumentException(\n"
+        "    throw kotlin.IllegalArgumentException(\n"
         "        \"Can't get the number of an unknown enum value.\");\n"
         "  }\n");
   }
@@ -152,7 +152,7 @@ void EnumLiteGenerator::Generate(io::Printer* printer) {
       "/**\n"
       " * @deprecated Use {@link #forNumber(int)} instead.\n"
       " */\n"
-      "@kotlin.lang.Deprecated\n"
+      "@kotlin.Deprecated\n"
       "public static $classname$ valueOf(int value) {\n"
       "  return forNumber(value);\n"
       "}\n"

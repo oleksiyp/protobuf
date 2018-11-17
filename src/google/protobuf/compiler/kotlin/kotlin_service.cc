@@ -198,7 +198,7 @@ void ImmutableServiceGenerator::GenerateCallMethod(io::Printer* printer) {
     "    com.google.protobuf.RpcCallback<\n"
     "      com.google.protobuf.Message> done) {\n"
     "  if (method.getService() != getDescriptor()) {\n"
-    "    throw new kotlin.lang.IllegalArgumentException(\n"
+    "    throw kotlin.IllegalArgumentException(\n"
     "      \"Service.callMethod() given method descriptor for wrong \" +\n"
     "      \"service type.\");\n"
     "  }\n"
@@ -224,7 +224,7 @@ void ImmutableServiceGenerator::GenerateCallMethod(io::Printer* printer) {
 
   printer->Print(
     "default:\n"
-    "  throw new kotlin.lang.AssertionError(\"Can't get here.\");\n");
+    "  throw kotlin.lang.AssertionError(\"Can't get here.\");\n");
 
   printer->Outdent();
   printer->Outdent();
@@ -245,7 +245,7 @@ void ImmutableServiceGenerator::GenerateCallBlockingMethod(
     "    com.google.protobuf.Message request)\n"
     "    throws com.google.protobuf.ServiceException {\n"
     "  if (method.getService() != getDescriptor()) {\n"
-    "    throw new kotlin.lang.IllegalArgumentException(\n"
+    "    throw kotlin.IllegalArgumentException(\n"
     "      \"Service.callBlockingMethod() given method descriptor for \" +\n"
     "      \"wrong service type.\");\n"
     "  }\n"
@@ -268,7 +268,7 @@ void ImmutableServiceGenerator::GenerateCallBlockingMethod(
 
   printer->Print(
     "default:\n"
-    "  throw new kotlin.lang.AssertionError(\"Can't get here.\");\n");
+    "  throw kotlin.lang.AssertionError(\"Can't get here.\");\n");
 
   printer->Outdent();
   printer->Outdent();
@@ -290,7 +290,7 @@ void ImmutableServiceGenerator::GenerateGetPrototype(RequestOrResponse which,
     "    get$request_or_response$Prototype(\n"
     "    com.google.protobuf.Descriptors.MethodDescriptor method) {\n"
     "  if (method.getService() != getDescriptor()) {\n"
-    "    throw new kotlin.lang.IllegalArgumentException(\n"
+    "    throw kotlin.IllegalArgumentException(\n"
     "      \"Service.get$request_or_response$Prototype() given method \" +\n"
     "      \"descriptor for wrong service type.\");\n"
     "  }\n"
@@ -312,7 +312,7 @@ void ImmutableServiceGenerator::GenerateGetPrototype(RequestOrResponse which,
 
   printer->Print(
     "default:\n"
-    "  throw new kotlin.lang.AssertionError(\"Can't get here.\");\n");
+    "  throw kotlin.lang.AssertionError(\"Can't get here.\");\n");
 
   printer->Outdent();
   printer->Outdent();

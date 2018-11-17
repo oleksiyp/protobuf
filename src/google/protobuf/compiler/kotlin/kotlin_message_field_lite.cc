@@ -66,10 +66,10 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   (*variables)["group_or_message"] =
     (GetType(descriptor) == FieldDescriptor::TYPE_GROUP) ?
     "Group" : "Message";
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
   (*variables)["required"] = descriptor->is_required() ? "true" : "false";
 
   if (SupportFieldPresence(descriptor->file())) {
@@ -175,7 +175,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void set$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  $name$_ = value;\n"
     "  $set_has_field_bit_message$\n"
@@ -196,7 +196,7 @@ GenerateMembers(io::Printer* printer) const {
     "@kotlin.lang.SuppressWarnings({\"ReferenceEquality\"})\n"
     "private void merge$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  if ($name$_ != null &&\n"
     "      $name$_ != $type$.getDefaultInstance()) {\n"
@@ -419,7 +419,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void set$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  $oneof_name$_ = value;\n"
     "  $set_oneof_case_message$;\n"
@@ -439,7 +439,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void merge$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  if ($has_oneof_case_message$ &&\n"
     "      $oneof_name$_ != $type$.getDefaultInstance()) {\n"
@@ -680,7 +680,7 @@ GenerateMembers(io::Printer* printer) const {
     "private void set$capitalized_name$(\n"
     "    int index, $type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.set(index, value);\n"
@@ -700,7 +700,7 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "private void add$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.add(value);\n"
@@ -712,7 +712,7 @@ GenerateMembers(io::Printer* printer) const {
     "private void add$capitalized_name$(\n"
     "    int index, $type$ value) {\n"
     "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
+    "    throw NullPointerException();\n"
     "  }\n"
     "  ensure$capitalized_name$IsMutable();\n"
     "  $name$_.add(index, value);\n"

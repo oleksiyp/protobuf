@@ -40,13 +40,13 @@ namespace compiler {
 namespace kotlin {
 namespace {
 
-TEST(KotlinDocCommentTest, Escaping) {
-  EXPECT_EQ("foo /&#42; bar *&#47; baz", EscapeKotlindoc("foo /* bar */ baz"));
-  EXPECT_EQ("foo /&#42;&#47; baz", EscapeKotlindoc("foo /*/ baz"));
-  EXPECT_EQ("{&#64;foo}", EscapeKotlindoc("{@foo}"));
-  EXPECT_EQ("&lt;i&gt;&amp;&lt;/i&gt;", EscapeKotlindoc("<i>&</i>"));
-  EXPECT_EQ("foo&#92;u1234bar", EscapeKotlindoc("foo\\u1234bar"));
-  EXPECT_EQ("&#64;deprecated", EscapeKotlindoc("@deprecated"));
+TEST(JavadocCommentTest, Escaping) {
+  EXPECT_EQ("foo /&#42; bar *&#47; baz", EscapeJavadoc("foo /* bar */ baz"));
+  EXPECT_EQ("foo /&#42;&#47; baz", EscapeJavadoc("foo /*/ baz"));
+  EXPECT_EQ("{&#64;foo}", EscapeJavadoc("{@foo}"));
+  EXPECT_EQ("&lt;i&gt;&amp;&lt;/i&gt;", EscapeJavadoc("<i>&</i>"));
+  EXPECT_EQ("foo&#92;u1234bar", EscapeJavadoc("foo\\u1234bar"));
+  EXPECT_EQ("&#64;deprecated", EscapeJavadoc("@deprecated"));
 }
 
 // TODO(kenton):  It's hard to write a robust test of the doc comments -- we

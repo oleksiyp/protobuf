@@ -63,7 +63,7 @@ void WriteMethodDocComment(io::Printer* printer,
                            const MethodDescriptor* method);
 
 // Exposed for testing only.
-PROTOC_EXPORT std::string EscapeKotlindoc(const std::string& input);
+PROTOC_EXPORT std::string EscapeJavadoc(const std::string& input);
 
 }  // namespace kotlin
 }  // namespace compiler

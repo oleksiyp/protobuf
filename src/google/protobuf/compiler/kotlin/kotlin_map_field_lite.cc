@@ -96,9 +96,9 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   (*variables)["key_wire_type"] = WireType(key);
   (*variables)["key_default_value"] = DefaultValue(key, true, name_resolver);
   (*variables)["key_null_check"] = IsReferenceType(keyKotlinType) ?
-      "if (key == null) { throw new kotlin.lang.NullPointerException(); }" : "";
+      "if (key == null) { throw kotlin.lang.NullPointerException(); }" : "";
   (*variables)["value_null_check"] = IsReferenceType(valueKotlinType) ?
-      "if (value == null) { throw new kotlin.lang.NullPointerException(); }" : "";
+      "if (value == null) { throw kotlin.lang.NullPointerException(); }" : "";
 
   if (GetKotlinType(value) == KOTLINTYPE_ENUM) {
     // We store enums as Integers internally.
@@ -128,10 +128,10 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   }
   (*variables)["type_parameters"] =
       (*variables)["boxed_key_type"] + ", " + (*variables)["boxed_value_type"];
-  // TODO(birdo): Add @deprecated kotlindoc when generating kotlindoc is supported
+  // TODO(birdo): Add @deprecated javadoc when generating javadoc is supported
   // by the proto compiler
   (*variables)["deprecation"] = descriptor->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
 
   (*variables)["default_entry"] = (*variables)["capitalized_name"] +
       "DefaultEntryHolder.defaultEntry";
@@ -176,7 +176,7 @@ GenerateInterfaceMembers(io::Printer* printer) const {
         "/**\n"
         " * Use {@link #get$capitalized_name$Map()} instead.\n"
         " */\n"
-        "@kotlin.lang.Deprecated\n"
+        "@kotlin.Deprecated\n"
         "kotlin.util.Map<$boxed_key_type$, $value_enum_type$>\n"
         "${$get$capitalized_name$$}$();\n");
     printer->Annotate("{", "}", descriptor_);
@@ -205,7 +205,7 @@ GenerateInterfaceMembers(io::Printer* printer) const {
           "/**\n"
           " * Use {@link #get$capitalized_name$ValueMap()} instead.\n"
           " */\n"
-          "@kotlin.lang.Deprecated\n"
+          "@kotlin.Deprecated\n"
           "kotlin.util.Map<$type_parameters$>\n"
           "${$get$capitalized_name$Value$}$();\n");
       printer->Annotate("{", "}", descriptor_);
@@ -237,7 +237,7 @@ GenerateInterfaceMembers(io::Printer* printer) const {
         "/**\n"
         " * Use {@link #get$capitalized_name$Map()} instead.\n"
         " */\n"
-        "@kotlin.lang.Deprecated\n"
+        "@kotlin.Deprecated\n"
         "kotlin.util.Map<$type_parameters$>\n"
         "${$get$capitalized_name$$}$();\n");
     printer->Annotate("{", "}", descriptor_);
@@ -328,7 +328,7 @@ GenerateMembers(io::Printer* printer) const {
         "/**\n"
         " * Use {@link #get$capitalized_name$Map()} instead.\n"
         " */\n"
-        "@kotlin.lang.Deprecated\n"
+        "@kotlin.Deprecated\n"
         "public kotlin.util.Map<$boxed_key_type$, $value_enum_type$>\n"
         "${$get$capitalized_name$$}$() {\n"
         "  return get$capitalized_name$Map();\n"
@@ -375,7 +375,7 @@ GenerateMembers(io::Printer* printer) const {
         "  kotlin.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
         "      internalGet$capitalized_name$();\n"
         "  if (!map.containsKey(key)) {\n"
-        "    throw new kotlin.lang.IllegalArgumentException();\n"
+        "    throw kotlin.IllegalArgumentException();\n"
         "  }\n"
         "  return $name$ValueConverter.doForward(map.get(key));\n"
         "}\n");
@@ -387,7 +387,7 @@ GenerateMembers(io::Printer* printer) const {
           " * Use {@link #get$capitalized_name$ValueMap()} instead.\n"
           " */\n"
           "@kotlin.lang.Override\n"
-          "@kotlin.lang.Deprecated\n"
+          "@kotlin.Deprecated\n"
           "public kotlin.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
           "${$get$capitalized_name$Value$}$() {\n"
           "  return get$capitalized_name$ValueMap();\n"
@@ -429,7 +429,7 @@ GenerateMembers(io::Printer* printer) const {
           "  kotlin.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
           "      internalGet$capitalized_name$();\n"
           "  if (!map.containsKey(key)) {\n"
-          "    throw new kotlin.lang.IllegalArgumentException();\n"
+          "    throw kotlin.IllegalArgumentException();\n"
           "  }\n"
           "  return map.get(key);\n"
           "}\n");
@@ -442,7 +442,7 @@ GenerateMembers(io::Printer* printer) const {
         " * Use {@link #get$capitalized_name$Map()} instead.\n"
         " */\n"
         "@kotlin.lang.Override\n"
-        "@kotlin.lang.Deprecated\n"
+        "@kotlin.Deprecated\n"
         "public kotlin.util.Map<$type_parameters$> "
         "${$get$capitalized_name$$}$() {\n"
         "  return get$capitalized_name$Map();\n"
@@ -484,7 +484,7 @@ GenerateMembers(io::Printer* printer) const {
         "  kotlin.util.Map<$type_parameters$> map =\n"
         "      internalGet$capitalized_name$();\n"
         "  if (!map.containsKey(key)) {\n"
-        "    throw new kotlin.lang.IllegalArgumentException();\n"
+        "    throw kotlin.IllegalArgumentException();\n"
         "  }\n"
         "  return map.get(key);\n"
         "}\n");
@@ -572,7 +572,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
         "/**\n"
         " * Use {@link #get$capitalized_name$Map()} instead.\n"
         " */\n"
-        "@kotlin.lang.Deprecated\n"
+        "@kotlin.Deprecated\n"
         "public kotlin.util.Map<$boxed_key_type$, $value_enum_type$>\n"
         "${$get$capitalized_name$$}$() {\n"
         "  return get$capitalized_name$Map();\n"
@@ -616,7 +616,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
         "  kotlin.util.Map<$boxed_key_type$, $value_enum_type$> map =\n"
         "      instance.get$capitalized_name$Map();\n"
         "  if (!map.containsKey(key)) {\n"
-        "    throw new kotlin.lang.IllegalArgumentException();\n"
+        "    throw kotlin.IllegalArgumentException();\n"
         "  }\n"
         "  return map.get(key);\n"
         "}\n");
@@ -651,7 +651,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
           " * Use {@link #get$capitalized_name$ValueMap()} instead.\n"
           " */\n"
           "@kotlin.lang.Override\n"
-          "@kotlin.lang.Deprecated\n"
+          "@kotlin.Deprecated\n"
           "public kotlin.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
           "${$get$capitalized_name$Value$}$() {\n"
           "  return get$capitalized_name$ValueMap();\n"
@@ -693,7 +693,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
           "  kotlin.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
           "      instance.get$capitalized_name$ValueMap();\n"
           "  if (!map.containsKey(key)) {\n"
-          "    throw new kotlin.lang.IllegalArgumentException();\n"
+          "    throw kotlin.IllegalArgumentException();\n"
           "  }\n"
           "  return map.get(key);\n"
           "}\n");
@@ -728,7 +728,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
         " * Use {@link #get$capitalized_name$Map()} instead.\n"
         " */\n"
         "@kotlin.lang.Override\n"
-        "@kotlin.lang.Deprecated\n"
+        "@kotlin.Deprecated\n"
         "public kotlin.util.Map<$type_parameters$> "
         "${$get$capitalized_name$$}$() {\n"
         "  return get$capitalized_name$Map();\n"
@@ -770,7 +770,7 @@ GenerateBuilderMembers(io::Printer* printer) const {
         "  kotlin.util.Map<$type_parameters$> map =\n"
         "      instance.get$capitalized_name$Map();\n"
         "  if (!map.containsKey(key)) {\n"
-        "    throw new kotlin.lang.IllegalArgumentException();\n"
+        "    throw kotlin.IllegalArgumentException();\n"
         "  }\n"
         "  return map.get(key);\n"
         "}\n");

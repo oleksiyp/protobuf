@@ -259,7 +259,7 @@ void FileGenerator::Generate(io::Printer* printer) {
       "$deprecation$public final class $classname$ {\n"
       "  private $ctor$() {}\n",
       "deprecation", file_->options().deprecated() ?
-          "@kotlin.lang.Deprecated " : "",
+          "@kotlin.Deprecated " : "",
       "classname", classname_,
       "ctor", classname_);
   printer->Annotate("classname", file_->name());

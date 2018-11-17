@@ -238,7 +238,7 @@ GenerateDescriptorMethods(io::Printer* printer) {
     }
     printer->Print(
         "default:\n"
-        "  throw new RuntimeException(\n"
+        "  throw RuntimeException(\n"
         "      \"Invalid map field number: \" + number);\n");
     printer->Outdent();
     printer->Outdent();
@@ -264,7 +264,7 @@ GenerateDescriptorMethods(io::Printer* printer) {
     }
     printer->Print(
         "default:\n"
-        "  throw new RuntimeException(\n"
+        "  throw RuntimeException(\n"
         "      \"Invalid map field number: \" + number);\n");
     printer->Outdent();
     printer->Outdent();
@@ -382,7 +382,7 @@ GenerateCommonBuilderMethods(io::Printer* printer) {
     "public $classname$ build() {\n"
     "  $classname$ result = buildPartial();\n"
     "  if (!result.isInitialized()) {\n"
-    "    throw newUninitializedMessageException(result);\n"
+    "    throwUninitializedMessageException(result);\n"
     "  }\n"
     "  return result;\n"
     "}\n"

@@ -135,7 +135,7 @@ void ImmutableMessageLiteGenerator::GenerateInterface(io::Printer* printer) {
         "          ExtendableMessageOrBuilder<\n"
         "              $classname$, $classname$.Builder> {\n",
         "deprecation", descriptor_->options().deprecated() ?
-            "@kotlin.lang.Deprecated " : "",
+            "@kotlin.Deprecated " : "",
         "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
         "classname", descriptor_->name(),
         "{", "", "}", "");
@@ -145,7 +145,7 @@ void ImmutableMessageLiteGenerator::GenerateInterface(io::Printer* printer) {
         "    $extra_interfaces$\n"
         "    com.google.protobuf.MessageLiteOrBuilder {\n",
         "deprecation", descriptor_->options().deprecated() ?
-            "@kotlin.lang.Deprecated " : "",
+            "@kotlin.Deprecated " : "",
         "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
         "classname", descriptor_->name(),
         "{", "", "}", "");
@@ -184,7 +184,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
   variables["classname"] = descriptor_->name();
   variables["extra_interfaces"] = ExtraMessageInterfaces(descriptor_);
   variables["deprecation"] = descriptor_->options().deprecated()
-      ? "@kotlin.lang.Deprecated " : "";
+      ? "@kotlin.Deprecated " : "";
 
   WriteMessageDocComment(printer, descriptor_);
   MaybePrintGeneratedAnnotation(context_, printer, descriptor_,
@@ -282,7 +282,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
       "/**\n"
       " * @deprecated Use {@link #forNumber(int)} instead.\n"
       " */\n"
-      "@kotlin.lang.Deprecated\n"
+      "@kotlin.Deprecated\n"
       "public static $oneof_capitalized_name$Case valueOf(int value) {\n"
       "  return forNumber(value);\n"
       "}\n"
@@ -455,7 +455,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
   printer->Outdent();
   printer->Print(
     "  }\n"
-    "  throw new UnsupportedOperationException();\n"
+    "  throw UnsupportedOperationException();\n"
     "}\n"
     "\n",
     "classname", name_resolver_->GetImmutableClassName(descriptor_));
@@ -986,7 +986,7 @@ void ImmutableMessageLiteGenerator::GenerateDynamicMethodMergeFromStream(
       "com.google.protobuf.ExtensionRegistryLite extensionRegistry =\n"
       "    (com.google.protobuf.ExtensionRegistryLite) arg1;\n"
       "if (extensionRegistry == null) {\n"
-      "  throw new kotlin.lang.NullPointerException();\n"
+      "  throw kotlin.lang.NullPointerException();\n"
       "}\n");
   printer->Print(
       "try {\n");
@@ -1083,9 +1083,9 @@ void ImmutableMessageLiteGenerator::GenerateDynamicMethodMergeFromStream(
   printer->Outdent();
   printer->Print(
       "} catch (com.google.protobuf.InvalidProtocolBufferException e) {\n"
-      "  throw new RuntimeException(e.setUnfinishedMessage(this));\n"
+      "  throw RuntimeException(e.setUnfinishedMessage(this));\n"
       "} catch (kotlin.io.IOException e) {\n"
-      "  throw new RuntimeException(\n"
+      "  throw RuntimeException(\n"
       "      new com.google.protobuf.InvalidProtocolBufferException(\n"
       "          e.getMessage()).setUnfinishedMessage(this));\n"
       "} finally {\n");
